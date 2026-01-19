@@ -135,12 +135,15 @@
        onCustomWidgetAfterUpdate(changedProperties) {
     var that = this;
 
-    // ✅ load XLSX library, not excel.js again
+    // ✅ load XLSX library (not excel.js again)
     let xlsxjs = "https://arnav973.github.io/sac-custom-widgets/xlsx.js";
 
     async function LoadLibs() {
         try {
-            await loadScript(xlsxjs, _shadowRoot);
+            // load only once
+            if (!window.XLSX) {
+                await loadScript(xlsxjs, _shadowRoot);
+            }
         } catch (e) {
             console.log("XLSX load error:", e);
         } finally {
