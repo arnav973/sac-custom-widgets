@@ -132,21 +132,24 @@
             }
         }
 
-        onCustomWidgetAfterUpdate(changedProperties) {
-            var that = this;
+       onCustomWidgetAfterUpdate(changedProperties) {
+    var that = this;
 
-            let xlsxjs = "arnav973.github.io/sac-custom-widgets/excel.js";
-            async function LoadLibs() {
-                try {
-                    await loadScript(xlsxjs, _shadowRoot);
-                } catch (e) {
-                    console.log(e);
-                } finally {
-                    loadthis(that, changedProperties);
-                }
-            }
-            LoadLibs();
+    // ✅ load XLSX library, not excel.js again
+    let xlsxjs = "https://arnav973.github.io/sac-custom-widgets/xlsx.js";
+
+    async function LoadLibs() {
+        try {
+            await loadScript(xlsxjs, _shadowRoot);
+        } catch (e) {
+            console.log("XLSX load error:", e);
+        } finally {
+            loadthis(that, changedProperties);
         }
+    }
+    LoadLibs();
+}
+
 
         _renderExportButton() {
             let components = this.metadata ? JSON.parse(this.metadata)["components"] : {};
