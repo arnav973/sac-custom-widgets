@@ -1,6 +1,6 @@
 {
-  "id": "com.Priyanka.sap.sac.excel",
-  "version": "1.0.0",
+  "id": "com.arnav.sap.sac.excel",
+  "version": "4.0.0",
   "name": "Asset",
   "description": "Asset",
   "newInstancePrefix": "Asset",
