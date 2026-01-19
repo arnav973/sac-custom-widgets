@@ -12,14 +12,14 @@
   "webcomponents": [
     {
       "kind": "main",
-      "tag": "com-Priyanka-sap-sac-excel",
+      "tag": "com-arnav-sap-sac-excel",
       "url": "https://arnav973.github.io/sac-custom-widgets/excel.js",
       "integrity": "",
       "ignoreIntegrity": true
     },
     {
       "kind": "styling",
-      "tag": "com-Priyanka-sap-sac-excel-aps",
+      "tag": "com-arnav-sap-sac-excel",
       "url": "https://arnav973.github.io/sac-custom-widgets/excel.js",
       "integrity": "",
       "ignoreIntegrity": true
