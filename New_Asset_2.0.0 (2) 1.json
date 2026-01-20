@@ -13,14 +13,14 @@
     {
       "kind": "main",
       "tag": "com-fd-djaja-sap-sac-excel",
-      "url": "https://ntt.github.io/sac-custom-widgets/excel (1) 2.js",
+      "url": "https://ntt.github.io/sac-custom-widgets/excel.js",
       "integrity": "",
       "ignoreIntegrity": true
     },
     {
       "kind": "styling",
       "tag": "com-fd-djaja-sap-sac-excel-aps",
-      "url": "https://ntt.github.io/sac-custom-widgets/aps_excel (1) 2.js",
+      "url": "https://ntt.github.io/sac-custom-widgets/aps_excel.js",
       "integrity": "",
       "ignoreIntegrity": true
     }
