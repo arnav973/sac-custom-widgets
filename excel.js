@@ -356,10 +356,10 @@
                                                 if (len > 0) {
                                                     rec_count = rec_count + 1;
                                                     result_final.push({
-                                                      'Asset': rec[0].trim(),
-                                                      'TargetAssetClass': rec[1].trim(),
-                                                      'CWIPCapitalizedMonth': rec[2].trim(),
-                                                      'RetirementMonth': rec[3].trim(),
+                                                      'ID': rec[0].trim(),
+                                                      'CWIP_T_CLASS': rec[1].trim(),
+                                                      'CWIP_T_MONTH': rec[2].trim(),
+                                                      'RETIREMENT_MONTH': rec[3].trim(),
                                                     });
                                                 }
                                             }
