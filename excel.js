@@ -301,14 +301,22 @@
                     },
 
                     onValidate: function (e) {
-                        var fU = this.getView().byId("idfileUploader");
-                        //var domRef = fU.getFocusDomRef();
-                        //var domRef = this.getView().byId("__xmlview1--idfileUploader-fu").getFocusDomRef();
-                        //var file = domRef.files[0];
-                        var file = $("#__xmlview1--idfileUploader-fu")[0].files[0];
-                        var this_ = this;
+    var fU = this.getView().byId("idfileUploader");
+    var this_ = this;
 
-                        this_.wasteTime();
+    // ✅ STOP if user didn't choose file
+    var fileDom = $("#__xmlview1--idfileUploader-fu")[0];
+
+    if (!fileDom || !fileDom.files || fileDom.files.length === 0) {
+        MessageBox.error("❌ Please choose a file before clicking Upload.");
+        return;
+    }
+
+    var file = fileDom.files[0];
+
+    // ✅ Continue only if file exists
+    this_.wasteTime();
+
 
                         var oModel = new JSONModel();
                         oModel.setData({
