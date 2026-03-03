@@ -300,16 +300,18 @@
                         }
                     },
 
-                    onValidate: function (e) {
-                    var fU = this.getView().byId("idfileUploader");
-                    //var domRef = fU.getFocusDomRef();
-                    //var domRef = this.getView().byId("__xmlview1--idfileUploader-fu").getFocusDomRef();
-                    //var file = domRef.files[0];
-                    var file = $("#__xmlview1--idfileUploader-fu")[0].files[0];
-                    var this_ = this;
-
-                     this_.wasteTime();
-
+                        onValidate: function (e) {
+                        var fU = this.getView().byId("idfileUploader");
+                        var file = $("#__xmlview1--idfileUploader-fu")[0].files[0];
+                        var this_ = this;
+                    
+                        // ⚠️ Check if file is selected
+                        if (typeof file === "undefined") {
+                            sap.m.MessageToast.show("Please select a file before clicking Upload");
+                            return;
+                        }
+                    
+                        this_.wasteTime();
 
 
                         var oModel = new JSONModel();
