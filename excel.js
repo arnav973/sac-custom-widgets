@@ -334,16 +334,32 @@
                             workbook.SheetNames.forEach(function (sheetName) {
                                 if (sheetName === "Sheet1") {
                                     correctsheet = true;
-                                    var csv = XLSX.utils.sheet_to_csv(workbook.Sheets[sheetName]);
+                                    /*var csv = XLSX.utils.sheet_to_csv(workbook.Sheets[sheetName]);
                                     if (csv.length) {
                                         result.push(csv);
                                     }
-                                    result = result.join("[$@~!~@$]")
+                                    result = result.join("[$@~!~@$]")*/
+                                    var jsonData = XLSX.utils.sheet_to_json(
+                                    workbook.Sheets[sheetName],
+                                    {
+                                        raw: false,
+                                        defval: ""
+                                    }
+                                );
+                                
+                                result_final = jsonData;
                                 }
                             });
 
                             if (correctsheet) {
-                                var lengthfield = result.split("[$@~!~@$]")[0].split("[#@~!~@#]").length;
+
+                                var lengthfield = 0;
+                            
+                                if (result_final.length > 0) {
+                            
+                                    lengthfield = Object.keys(result_final[0]).length;
+                                }
+                            
                                 console.log("lengthfield: " + lengthfield);
 
                                 var total = this_.getView().byId("total");
@@ -351,30 +367,50 @@
 
                                 var len = 0;
                                 if (lengthfield === 7) {
-                                    for (var i = 1; i < result.split("[$@~!~@$]").length; i++) {
-                                        if (result.split("[$@~!~@$]")[i].length > 0) {
-
-                                            var rec = result.split("[$@~!~@$]")[i].split("[#@~!~@#]");
-                                            if (rec.length > 0) {
-                                                len = rec[0].trim().length + rec[1].trim().length + rec[2].trim().length + rec[3].trim().length + rec[4].trim().length + 
-                                                    rec[5].trim().length + rec[6].trim().length;
-                                                if (len > 0) {
-                                                    rec_count = rec_count + 1;
-                                                    result_final.push({
-                                                     'ID': rec[0].trim(),
-                                                      'DESCRIPTION': rec[1].trim(),
-                                                      'H1': rec[2].trim(),
-                                                      'COMPANY': rec[3].trim(),
-                                                      'ASSET_CLASS': rec[4].trim(),
-                                                      'COSTCENTER': rec[5].trim(),
-                                                      'CAPITALIZED': rec[6].trim(),
-                                                    });
-                                                }
+                                    var len = 0;
+                                        
+                                        result = [];
+                                        
+                                        for (var i = 0; i < result_final.length; i++) {
+                                        
+                                            var rec = result_final[i];
+                                        
+                                            var ID = rec.ID ? rec.ID.toString().trim() : "";
+                                            var DESCRIPTION = rec.DESCRIPTION ? rec.DESCRIPTION.toString().trim() : "";
+                                            var H1 = rec.H1 ? rec.H1.toString().trim() : "";
+                                            var COMPANY = rec.COMPANY ? rec.COMPANY.toString().trim() : "";
+                                            var ASSET_CLASS = rec.ASSET_CLASS ? rec.ASSET_CLASS.toString().trim() : "";
+                                            var COSTCENTER = rec.COSTCENTER ? rec.COSTCENTER.toString().trim() : "";
+                                            var CAPITALIZED = rec.CAPITALIZED ? rec.CAPITALIZED.toString().trim() : "";
+                                        
+                                            len =
+                                                ID.length +
+                                                DESCRIPTION.length +
+                                                H1.length +
+                                                COMPANY.length +
+                                                ASSET_CLASS.length +
+                                                COSTCENTER.length +
+                                                CAPITALIZED.length;
+                                        
+                                            if (len > 0) {
+                                        
+                                                rec_count = rec_count + 1;
+                                        
+                                                result.push({
+                                                    'ID': ID,
+                                                    'DESCRIPTION': DESCRIPTION,
+                                                    'H1': H1,
+                                                    'COMPANY': COMPANY,
+                                                    'ASSET_CLASS': ASSET_CLASS,
+                                                    'COSTCENTER': COSTCENTER,
+                                                    'CAPITALIZED': CAPITALIZED
+                                                });
                                             }
                                         }
-                                    }
+                                        
+                                      result_final = result;
 
-                                    if (result_final.length === 0) {
+                                        if (result_final.length === 0) {
                                         fU.setValue("");
                                         MessageToast.show("There is no record to be uploaded");
                                         this_.runNext();
